@@ -20,6 +20,12 @@ namespace ST10128054PROG6221POE
         {
             Recipe rc = new Recipe();
 
+            Console.WriteLine("Enter the number of ingredients for the recipe: ");
+
+            rc.setNumIngr(Convert.ToInt32(Console.ReadLine()));
+
+            
+
 
         }
     }

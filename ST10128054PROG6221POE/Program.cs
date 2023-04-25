@@ -14,12 +14,36 @@ namespace ST10128054PROG6221POE
         public static ArrayList scaledQuantArr = new ArrayList();
         public static ArrayList measurementArr = new ArrayList();
         public static ArrayList stepDescArr = new ArrayList();
+        public static int mainMenu;
 
 
         static void Main(string[] args)
         {
             Recipe rc = new Recipe();
 
+            Console.WriteLine("Recipe App\n" + 
+                              "************************************\n\n" + 
+                              "1) Enter ingredients and steps.\n" +
+                              "2) Scale measurements.\n" +
+                              "3) Display recipe.\n" +
+                              "4) Exit.");
+            mainMenu = Convert.ToInt32(Console.ReadLine());
+
+            while(mainMenu != 4)
+            {
+                if (mainMenu == 1)
+                {
+
+                }
+                else if (mainMenu == 2)
+                {
+
+                }
+                else if (mainMenu == 3)
+                {
+
+                }
+            }
 
             Console.WriteLine("Enter the number of ingredients for the recipe: ");
             rc.NumIngr = Convert.ToInt32(Console.ReadLine());

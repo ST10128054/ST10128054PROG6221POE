@@ -41,6 +41,22 @@ namespace ST10128054PROG6221POE
                 rc.setMeasurement(Console.ReadLine());
                 measurementArr[i] = rc.getMeasurement();
             }
+
+            Console.WriteLine("Enter the number of steps for the recipe: ");
+            rc.setNumSteps(Convert.ToInt32(Console.ReadLine()));
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int k = 0; k < 1; k++)
+            {
+                for (int j = 0; j < rc.getNumSteps(); j++)
+                {
+                    Console.WriteLine("Enter the description for step " + j + ": ");
+                    rc.setStepDesc(Console.ReadLine());
+                    sb.Append(rc.getStepDesc());
+                }
+                stepDescArr[k] = sb.ToString();
+            }
         }
     }
 }

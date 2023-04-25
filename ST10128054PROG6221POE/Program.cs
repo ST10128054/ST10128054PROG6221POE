@@ -9,15 +9,9 @@ namespace ST10128054PROG6221POE
 {
     internal class Program
     {
-        
-
-        //public static String[] ingrNameArr;
-        //public static int[] ingrQuantArr;
-        //public static String[] measurementArr;
-        //public static String[] stepDescArr;
-
         public static ArrayList ingrNameArr = new ArrayList();
         public static ArrayList ingrQuantArr = new ArrayList();
+        public static ArrayList scaledQuantArr = new ArrayList();
         public static ArrayList measurementArr = new ArrayList();
         public static ArrayList stepDescArr = new ArrayList();
 
@@ -26,8 +20,8 @@ namespace ST10128054PROG6221POE
         {
             Recipe rc = new Recipe();
 
-            Console.WriteLine("Enter the number of ingredients for the recipe: ");
 
+            Console.WriteLine("Enter the number of ingredients for the recipe: ");
             rc.NumIngr = Convert.ToInt32(Console.ReadLine());
 
             for (int i = 0; i < rc.NumIngr; i++)
@@ -59,11 +53,52 @@ namespace ST10128054PROG6221POE
             }
             stepDescArr.Add(sb.ToString());
 
+            Console.WriteLine("Do you want to alter the quantities of the ingredients?\n" +
+                              "1) Half\n" +
+                              "2) Double\n" +
+                              "3) Triple\n" +
+                              "4) None");
+            rc.Alter = Convert.ToInt32(Console.ReadLine());
+
+            if (rc.Alter == 1)
+            {
+                for (int i = 0; i < ingrQuantArr.Count; i++)
+                {
+                    rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 0.5;
+                    scaledQuantArr.Add(rc.ScaledQuant);
+                }  
+            }
+            else if (rc.Alter == 2)
+            {
+                for (int i = 0; i < ingrQuantArr.Count; i++)
+                {
+                    rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 2;
+                    scaledQuantArr.Add(rc.ScaledQuant);
+                }
+            }
+            else if (rc.Alter == 3)
+            {
+                for (int i = 0; i < ingrQuantArr.Count; i++)
+                {
+                    rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 3;
+                    scaledQuantArr.Add(rc.ScaledQuant);
+                }
+            }
+            else if (rc.Alter == 4)
+            {
+                for (int i = 0; i < ingrQuantArr.Count; i++)
+                {
+                    rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]);
+                    scaledQuantArr.Add(rc.ScaledQuant);
+                }
+            }
+
+
             Console.WriteLine("************************************************************");
             for (int i = 0; i < ingrQuantArr.Count; i++)
             {
                 Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
-                                  "Quantity: " + ingrQuantArr[i] + "\n" +
+                                  "Quantity: " + scaledQuantArr[i] + "\n" +
                                   "Measurements: " + measurementArr[i] + "\n");
             }
             Console.WriteLine("Directions: ");

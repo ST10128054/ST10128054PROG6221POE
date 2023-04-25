@@ -8,9 +8,9 @@ namespace ST10128054PROG6221POE
 {
     public class Recipe
     {
-        private int numIngr, ingrQuant, numSteps;
+        private int numIngr, numSteps, alter;
         private String ingrName, measurement, stepDesc;
-        
+        private Double ingrQuant, scaledQuant;
         public String IngrName
         {
             get { return ingrName; }
@@ -23,7 +23,7 @@ namespace ST10128054PROG6221POE
             set { numIngr = value; }
         }
 
-        public int IngrQuant
+        public Double IngrQuant
         {
             get { return ingrQuant; }
             set { ingrQuant = value; }
@@ -45,6 +45,18 @@ namespace ST10128054PROG6221POE
         {
             get { return stepDesc; }
             set { stepDesc = value; }
+        }
+
+        public int Alter
+        {
+            get { return alter; }
+            set { alter = value; }
+        }
+
+        public Double ScaledQuant
+        {
+            get { return scaledQuant; }
+            set { scaledQuant = value; }
         }
 
     }

@@ -9,6 +9,7 @@ namespace ST10128054PROG6221POE
 {
     internal class Program
     {
+        public static Recipe rc = new Recipe();
         public static ArrayList ingrNameArr = new ArrayList();
         public static ArrayList ingrQuantArr = new ArrayList();
         public static ArrayList scaledQuantArr = new ArrayList();
@@ -19,32 +20,45 @@ namespace ST10128054PROG6221POE
 
         static void Main(string[] args)
         {
-            Recipe rc = new Recipe();
-
             Console.WriteLine("Recipe App\n" + 
                               "************************************\n\n" + 
                               "1) Enter ingredients and steps.\n" +
                               "2) Scale measurements.\n" +
-                              "3) Display recipe.\n" +
-                              "4) Exit.");
+                              "3) Reset measurements.\n" +
+                              "4) Display recipe.\n" +
+                              "5) Clear recipe.\n" +
+                              "6) Exit.\n");
             mainMenu = Convert.ToInt32(Console.ReadLine());
 
-            while(mainMenu != 4)
+            while(mainMenu != 6)
             {
                 if (mainMenu == 1)
                 {
-
+                    enterRecipe();
                 }
                 else if (mainMenu == 2)
                 {
-
+                    scaleMeasurement();
                 }
                 else if (mainMenu == 3)
                 {
-
+                    resetMeasurement();
+                }
+                else if (mainMenu == 4)
+                {
+                    displayRecipe();
+                }
+                else if (mainMenu == 5)
+                {
+                    clearRecipe();
                 }
             }
 
+            Console.ReadLine();
+        }
+
+        public static void enterRecipe()
+        {
             Console.WriteLine("Enter the number of ingredients for the recipe: ");
             rc.NumIngr = Convert.ToInt32(Console.ReadLine());
 
@@ -55,19 +69,16 @@ namespace ST10128054PROG6221POE
                 ingrNameArr.Add(rc.IngrName);
                 Console.WriteLine("Enter the quantity of ingredient " + (i + 1) + ": ");
                 rc.IngrQuant = Convert.ToInt32(Console.ReadLine());
-                ingrQuantArr.Add(rc.IngrQuant); 
+                ingrQuantArr.Add(rc.IngrQuant);
                 Console.WriteLine("Enter the unit of measurement of ingredient " + (i + 1) + ": ");
                 rc.Measurement = Console.ReadLine();
                 measurementArr.Add(rc.Measurement);
-
-                
             }
 
             Console.WriteLine("Enter the number of steps for the recipe: ");
             rc.NumSteps = Convert.ToInt32(Console.ReadLine());
 
             StringBuilder sb = new StringBuilder();
-
 
             for (int j = 0; j < rc.NumSteps; j++)
             {
@@ -76,12 +87,14 @@ namespace ST10128054PROG6221POE
                 sb.Append("Step " + (j + 1) + ": " + rc.StepDesc + "\n");
             }
             stepDescArr.Add(sb.ToString());
+        }
 
+        public static void scaleMeasurement()
+        {
             Console.WriteLine("Do you want to alter the quantities of the ingredients?\n" +
-                              "1) Half\n" +
-                              "2) Double\n" +
-                              "3) Triple\n" +
-                              "4) None");
+                              "1) Half.\n" +
+                              "2) Double.\n" +
+                              "3) Triple.\n");
             rc.Alter = Convert.ToInt32(Console.ReadLine());
 
             if (rc.Alter == 1)
@@ -90,7 +103,7 @@ namespace ST10128054PROG6221POE
                 {
                     rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 0.5;
                     scaledQuantArr.Add(rc.ScaledQuant);
-                }  
+                }
             }
             else if (rc.Alter == 2)
             {
@@ -108,16 +121,20 @@ namespace ST10128054PROG6221POE
                     scaledQuantArr.Add(rc.ScaledQuant);
                 }
             }
-            else if (rc.Alter == 4)
+            
+        }
+
+        public static void resetMeasurement()
+        {
+            for (int i = 0; i < ingrQuantArr.Count; i++)
             {
-                for (int i = 0; i < ingrQuantArr.Count; i++)
-                {
-                    rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]);
-                    scaledQuantArr.Add(rc.ScaledQuant);
-                }
+                rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]);
+                scaledQuantArr.Add(rc.ScaledQuant);
             }
+        }
 
-
+        public static void displayRecipe() 
+        {
             Console.WriteLine("************************************************************");
             for (int i = 0; i < ingrQuantArr.Count; i++)
             {
@@ -132,7 +149,15 @@ namespace ST10128054PROG6221POE
             }
             Console.WriteLine("************************************************************");
 
-            Console.ReadLine();
+        }
+
+        public static void clearRecipe()
+        {
+            ingrNameArr.Clear();
+            ingrQuantArr.Clear();
+            scaledQuantArr.Clear();
+            measurementArr.Clear();
+            stepDescArr.Clear();
         }
     }
 }

@@ -29,7 +29,18 @@ namespace ST10128054PROG6221POE
             measurementArr = new string[rc.getNumIngr()];
             stepDescArr = new string[rc.getNumIngr()];
 
-
+            for (int i = 0; i < rc.getNumIngr(); i++)
+            {
+                Console.WriteLine("Enter the name of ingredient " + i + ": ");
+                rc.setIngrName(Console.ReadLine());
+                ingrNameArr[i] = rc.getIngrName();
+                Console.WriteLine("Enter the quantity of ingredient " + i + ": ");
+                rc.setIngrQuant(Convert.ToInt32(Console.ReadLine()));
+                ingrQuantArr[i] = rc.getIngrQuant();
+                Console.WriteLine("Enter the unit of measurement of ingredient " + i + ": ");
+                rc.setMeasurement(Console.ReadLine());
+                measurementArr[i] = rc.getMeasurement();
+            }
         }
     }
 }

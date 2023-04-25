@@ -24,7 +24,10 @@ namespace ST10128054PROG6221POE
 
             rc.setNumIngr(Convert.ToInt32(Console.ReadLine()));
 
-            
+            ingrNameArr = new string[rc.getNumIngr()];
+            ingrQuantArr = new int[rc.getNumIngr()];
+            measurementArr = new string[rc.getNumIngr()];
+            stepDescArr = new string[rc.getNumIngr()];
 
 
         }

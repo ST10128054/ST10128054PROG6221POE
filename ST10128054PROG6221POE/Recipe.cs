@@ -10,12 +10,7 @@ namespace ST10128054PROG6221POE
     {
         private int numIngr, ingrQuant, numSteps;
         private String ingrName, measurement, stepDesc;
-        private int ;
-        private String ;
-        private int 
-        private String  ,;
-
-
+        
         public String IngrName
         {
             get { return ingrName; }

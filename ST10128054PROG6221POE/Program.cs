@@ -41,6 +41,8 @@ namespace ST10128054PROG6221POE
                 Console.WriteLine("Enter the unit of measurement of ingredient " + (i + 1) + ": ");
                 rc.Measurement = Console.ReadLine();
                 measurementArr.Add(rc.Measurement);
+
+                
             }
 
             Console.WriteLine("Enter the number of steps for the recipe: ");
@@ -48,16 +50,28 @@ namespace ST10128054PROG6221POE
 
             StringBuilder sb = new StringBuilder();
 
-            for (int k = 0; k < 1; k++)
+
+            for (int j = 0; j < rc.NumSteps; j++)
             {
-                for (int j = 0; j < rc.NumSteps; j++)
-                {
-                    Console.WriteLine("Enter the description for step " + (j + 1) + ": ");
-                    rc.StepDesc = Console.ReadLine();
-                    sb.Append(rc.StepDesc + "\n");
-                }
-                stepDescArr[k] = sb.ToString();
+                Console.WriteLine("Enter the description for step " + (j + 1) + ": ");
+                rc.StepDesc = Console.ReadLine();
+                sb.Append("Step " + (j + 1) + ": " + rc.StepDesc + "\n");
             }
+            stepDescArr.Add(sb.ToString());
+
+            Console.WriteLine("************************************************************");
+            for (int i = 0; i < ingrQuantArr.Count; i++)
+            {
+                Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
+                                  "Quantity: " + ingrQuantArr[i] + "\n" +
+                                  "Measurements: " + measurementArr[i] + "\n");
+            }
+            Console.WriteLine("Directions: ");
+            for (int i = 0; i < stepDescArr.Count; i++)
+            {
+                Console.WriteLine(stepDescArr[i]);
+            }
+            Console.WriteLine("************************************************************");
 
             Console.ReadLine();
         }

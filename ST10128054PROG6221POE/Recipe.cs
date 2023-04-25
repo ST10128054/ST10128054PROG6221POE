@@ -8,66 +8,48 @@ namespace ST10128054PROG6221POE
 {
     public class Recipe
     {
-        private int numIngr;
-        private String ingrName;
-        private int ingrQuant;
-        private String measurement;
-        private int numSteps;
-        private String stepDesc;
+        private int numIngr, ingrQuant, numSteps;
+        private String ingrName, measurement, stepDesc;
+        private int ;
+        private String ;
+        private int 
+        private String  ,;
 
 
-        public int getNumIngr()
+        public String IngrName
         {
-            return this.numIngr;
-        }
-        public void setNumIngr(int numIngr)
-        {
-            this.numIngr = numIngr;
+            get { return ingrName; }
+            set { ingrName = value; }
         }
 
-        public String getIngrName()
+        public int NumIngr
         {
-            return this.ingrName;
-        }
-        public void setIngrName(String ingrName)
-        {
-            this.ingrName = ingrName;
+            get { return numIngr; }
+            set { numIngr = value; }
         }
 
-        public int getIngrQuant()
+        public int IngrQuant
         {
-            return this.ingrQuant;
-        }
-        public void setIngrQuant(int ingrQuant)
-        {
-            this.ingrQuant = ingrQuant;
+            get { return ingrQuant; }
+            set { ingrQuant = value; }
         }
 
-        public String getMeasurement()
+        public String Measurement
         {
-            return this.measurement;
-        }
-        public void setMeasurement(String measurement)
-        {
-            this.measurement = measurement;
+            get { return measurement; }
+            set { measurement = value; }
         }
 
-        public int getNumSteps()
+        public int NumSteps
         {
-            return this.numSteps;
-        }
-        public void setNumSteps(int numSteps)
-        {
-            this.numSteps = numSteps;
+            get { return numSteps; }
+            set { numSteps = value; }
         }
 
-        public String getStepDesc()
+        public String StepDesc
         {
-            return this.stepDesc;
-        }
-        public void setStepDesc(String stepDesc)
-        {
-            this.stepDesc = stepDesc;
+            get { return stepDesc; }
+            set { stepDesc = value; }
         }
 
     }

@@ -18,9 +18,9 @@ namespace ST10128054PROG6221POE
         
         static void Main(string[] args)
         {
-            
-            
-            
+            Recipe rc = new Recipe();
+
+
         }
     }
 }

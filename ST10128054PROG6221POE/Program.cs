@@ -25,6 +25,7 @@ namespace ST10128054PROG6221POE
 
             while(mainMenu < 6)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("************************************\n" +
                                   "Recipe App\n" +
                                   "1) Enter ingredients and steps.\n" +
@@ -62,6 +63,7 @@ namespace ST10128054PROG6221POE
 
         public static void enterRecipe()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("************************************\n" + 
                               "Enter the number of ingredients for the recipe: ");
             rc.NumIngr = Convert.ToInt32(Console.ReadLine());
@@ -92,12 +94,13 @@ namespace ST10128054PROG6221POE
             }
             stepDescArr.Add(sb.ToString());
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("RECIPE SAVED.");
         }
 
         public static void scaleMeasurement()
         {
-            
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("************************************\n" + 
                               "Do you want to alter the quantities of the ingredients?\n" +
                               "1) Half.\n" +
@@ -132,11 +135,13 @@ namespace ST10128054PROG6221POE
                 }
                 scaled = true;
             }
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("MEASUREMENTS SCALED.");
         }
 
         public static void resetMeasurement()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             for (int i = 0; i < ingrQuantArr.Count; i++)
             {
                 scaledQuantArr.Insert(i, ingrQuantArr[i]);
@@ -146,27 +151,26 @@ namespace ST10128054PROG6221POE
 
         public static void displayRecipe() 
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("************************************");
             if (scaled == false)
             {
                 for (int i = 0; i < ingrQuantArr.Count; i++)
                 {
-                    Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
-                                      "Quantity: " + ingrQuantArr[i] + "\n" +
-                                      "Measurements: " + measurementArr[i] + "\n");
+                    Console.WriteLine("Ingredient " + (i+1) + ": " + ingrQuantArr[i] + " " + 
+                                      measurementArr[i] + " of " + ingrNameArr[i]);
                 }
             }
             else if (scaled == true)
             {
                 for (int i = 0; i < ingrQuantArr.Count; i++)
                 {
-                    Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
-                                      "Quantity: " + scaledQuantArr[i] + "\n" +
-                                      "Measurements: " + measurementArr[i] + "\n");
+                    Console.WriteLine("Ingredient " + (i + 1) + ": " + scaledQuantArr[i] + " " +
+                                      measurementArr[i] + " of " + ingrNameArr[i]);
                 }
             }
             
-            Console.WriteLine("Directions: ");
+            Console.WriteLine("Directions");
             for (int i = 0; i < stepDescArr.Count; i++)
             {
                 Console.WriteLine(stepDescArr[i]);
@@ -180,7 +184,7 @@ namespace ST10128054PROG6221POE
             scaledQuantArr.Clear();
             measurementArr.Clear();
             stepDescArr.Clear();
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("RECIPE CLEARED.");
         }
     }

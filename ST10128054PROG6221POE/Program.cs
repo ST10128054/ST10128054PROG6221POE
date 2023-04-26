@@ -15,23 +15,26 @@ namespace ST10128054PROG6221POE
         public static ArrayList scaledQuantArr = new ArrayList();
         public static ArrayList measurementArr = new ArrayList();
         public static ArrayList stepDescArr = new ArrayList();
-        public static int mainMenu;
+        public static int mainMenu = 0;
+        public static Boolean scaled = false;
 
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Recipe App\n" + 
-                              "************************************\n\n" + 
-                              "1) Enter ingredients and steps.\n" +
-                              "2) Scale measurements.\n" +
-                              "3) Reset measurements.\n" +
-                              "4) Display recipe.\n" +
-                              "5) Clear recipe.\n" +
-                              "6) Exit.\n");
-            mainMenu = Convert.ToInt32(Console.ReadLine());
+            
 
-            while(mainMenu != 6)
+            while(mainMenu < 6)
             {
+                Console.WriteLine("************************************\n" +
+                                  "Recipe App\n" +
+                                  "1) Enter ingredients and steps.\n" +
+                                  "2) Scale measurements.\n" +
+                                  "3) Reset measurements.\n" +
+                                  "4) Display recipe.\n" +
+                                  "5) Clear recipe.\n" +
+                                  "6) Exit.");
+                mainMenu = Convert.ToInt32(Console.ReadLine());
+
                 if (mainMenu == 1)
                 {
                     enterRecipe();
@@ -59,7 +62,8 @@ namespace ST10128054PROG6221POE
 
         public static void enterRecipe()
         {
-            Console.WriteLine("Enter the number of ingredients for the recipe: ");
+            Console.WriteLine("************************************\n" + 
+                              "Enter the number of ingredients for the recipe: ");
             rc.NumIngr = Convert.ToInt32(Console.ReadLine());
 
             for (int i = 0; i < rc.NumIngr; i++)
@@ -87,11 +91,15 @@ namespace ST10128054PROG6221POE
                 sb.Append("Step " + (j + 1) + ": " + rc.StepDesc + "\n");
             }
             stepDescArr.Add(sb.ToString());
+
+            Console.WriteLine("RECIPE SAVED.");
         }
 
         public static void scaleMeasurement()
         {
-            Console.WriteLine("Do you want to alter the quantities of the ingredients?\n" +
+            
+            Console.WriteLine("************************************\n" + 
+                              "Do you want to alter the quantities of the ingredients?\n" +
                               "1) Half.\n" +
                               "2) Double.\n" +
                               "3) Triple.\n");
@@ -102,53 +110,67 @@ namespace ST10128054PROG6221POE
                 for (int i = 0; i < ingrQuantArr.Count; i++)
                 {
                     rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 0.5;
-                    scaledQuantArr.Add(rc.ScaledQuant);
+                    scaledQuantArr.Insert(i, rc.ScaledQuant);
                 }
+                scaled = true;
             }
             else if (rc.Alter == 2)
             {
                 for (int i = 0; i < ingrQuantArr.Count; i++)
                 {
                     rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 2;
-                    scaledQuantArr.Add(rc.ScaledQuant);
+                    scaledQuantArr.Insert(i, rc.ScaledQuant);
                 }
+                scaled = true;
             }
             else if (rc.Alter == 3)
             {
                 for (int i = 0; i < ingrQuantArr.Count; i++)
                 {
                     rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]) * 3;
-                    scaledQuantArr.Add(rc.ScaledQuant);
+                    scaledQuantArr.Insert(i, rc.ScaledQuant);
                 }
+                scaled = true;
             }
-            
+            Console.WriteLine("MEASUREMENTS SCALED.");
         }
 
         public static void resetMeasurement()
         {
             for (int i = 0; i < ingrQuantArr.Count; i++)
             {
-                rc.ScaledQuant = Convert.ToDouble(ingrQuantArr[i]);
-                scaledQuantArr.Add(rc.ScaledQuant);
+                scaledQuantArr.Insert(i, ingrQuantArr[i]);
             }
+            Console.WriteLine("MEASUREMENTS RESET.");
         }
 
         public static void displayRecipe() 
         {
-            Console.WriteLine("************************************************************");
-            for (int i = 0; i < ingrQuantArr.Count; i++)
+            Console.WriteLine("************************************");
+            if (scaled == false)
             {
-                Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
-                                  "Quantity: " + scaledQuantArr[i] + "\n" +
-                                  "Measurements: " + measurementArr[i] + "\n");
+                for (int i = 0; i < ingrQuantArr.Count; i++)
+                {
+                    Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
+                                      "Quantity: " + ingrQuantArr[i] + "\n" +
+                                      "Measurements: " + measurementArr[i] + "\n");
+                }
             }
+            else if (scaled == true)
+            {
+                for (int i = 0; i < ingrQuantArr.Count; i++)
+                {
+                    Console.WriteLine("Ingredient name: " + ingrNameArr[i] + "\n" +
+                                      "Quantity: " + scaledQuantArr[i] + "\n" +
+                                      "Measurements: " + measurementArr[i] + "\n");
+                }
+            }
+            
             Console.WriteLine("Directions: ");
             for (int i = 0; i < stepDescArr.Count; i++)
             {
                 Console.WriteLine(stepDescArr[i]);
             }
-            Console.WriteLine("************************************************************");
-
         }
 
         public static void clearRecipe()
@@ -158,6 +180,8 @@ namespace ST10128054PROG6221POE
             scaledQuantArr.Clear();
             measurementArr.Clear();
             stepDescArr.Clear();
+
+            Console.WriteLine("RECIPE CLEARED.");
         }
     }
 }

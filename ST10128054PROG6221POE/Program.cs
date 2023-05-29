@@ -162,7 +162,7 @@ namespace ST10128054PROG6221POE
                     Console.WriteLine("Enter the name of ingredient " + (i + 1) + ": ");
                     rc.IngrName = Console.ReadLine();
                     sbIngr.Append(rc.IngrName + ",");
-                    //ingrNameList.Add(rc.IngrName);
+                    
                     while (!checkQuant)
                     {
                         try
@@ -180,12 +180,12 @@ namespace ST10128054PROG6221POE
                         }
                     }
                     sbQuant.Append(rc.IngrQuant + ",");
-                    //ingrQuantList.Add(rc.IngrQuant);
+                    
 
                     Console.WriteLine("Enter the unit of measurement of ingredient " + (i + 1) + ": ");
                     rc.Measurement = Console.ReadLine();
                     sbMeasurement.Append(rc.Measurement + ",");
-                    //measurementList.Add(rc.Measurement);
+                    
 
                     Console.WriteLine("Enter the number of calories of ingredient " + (i + 1) + ": ");
                     rc.Calories = Convert.ToInt32(Console.ReadLine());
@@ -273,7 +273,6 @@ namespace ST10128054PROG6221POE
                 }
                 stepDescList.Add(sbDesc.ToString());
                 ingrNameList.Add(sbIngr.ToString());
-                //ingrQuantList.Add(Convert.ToDouble(sbQuant));
                 ingrQuantListStr.Add(sbQuant.ToString());
                 measurementList.Add(sbMeasurement.ToString());
                 caloriesListStr.Add(sbCalories.ToString());
@@ -465,11 +464,23 @@ namespace ST10128054PROG6221POE
         //this method clears the recipe information
         public static void clearRecipe()
         {
+            recipeNameList.Clear();
             ingrNameList.Clear();
             ingrQuantList.Clear();
             scaledQuantList.Clear();
             measurementList.Clear();
             stepDescList.Clear();
+            caloriesList.Clear();
+            foodGroupList.Clear();
+
+            ingrQuantListStr.Clear();
+            ingrNamePrint.Clear();
+            ingrQuantPrint.Clear();
+            scaledQuantPrint.Clear();
+            measurementPrint.Clear();
+            caloriesPrint.Clear();
+            caloriesListStr.Clear();
+            foodGroupPrint.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("RECIPE CLEARED.");
         }

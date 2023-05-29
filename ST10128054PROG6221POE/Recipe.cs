@@ -8,13 +8,23 @@ namespace ST10128054PROG6221POE
 {
     public class Recipe
     {
-        private int numRec, numIngr, numSteps, alter;
-        private String recName, ingrName, measurement, stepDesc;
-        private Double ingrQuant, scaledQuant;
-        public int NumRec
+        private int numRecipe, numIngr, numSteps, alter;
+        private String recName, ingrName, measurement, stepDesc,foodGroup;
+        private Double ingrQuant, scaledQuant, calories;
+        public String FoodGroup
         {
-            get { return numRec; }
-            set { numRec = value; }
+            get { return foodGroup; }
+            set { foodGroup = value; }
+        }
+        public double Calories
+        {
+            get { return calories; }
+            set { calories = value; }
+        }
+        public int NumRecipe
+        {
+            get { return numRecipe; }
+            set { numRecipe = value; }
         }
 
         public String RecName

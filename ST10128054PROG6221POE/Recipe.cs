@@ -8,13 +8,37 @@ namespace ST10128054PROG6221POE
 {
     public class Recipe
     {
-        private int numRecipe, numIngr, numSteps, alter;
-        private String recName, ingrName, measurement, stepDesc,foodGroup;
-        private Double ingrQuant, scaledQuant, calories;
-        public String FoodGroup
+        public string RecName { get; set; }
+        public string IngrInfo { get; set; }
+        public string Instructions { get; set; }
+        /*private string step;
+        private string ingrName;
+        private string measurement;
+        private string foodGroup;
+        private int numRecipe;
+        private int numIngr;
+        private int numSteps;
+        private int alter;
+        private double ingrQuant;
+        private double scaledQuant;
+        private double calories;*/
+
+        public Recipe(string recName, string ingrInfo, string instructions)
+        {
+            RecName = recName;
+            IngrInfo = ingrInfo;
+            Instructions = instructions;
+        }
+
+        /*public String FoodGroup
         {
             get { return foodGroup; }
             set { foodGroup = value; }
+        }
+        public String Step
+        {
+            get { return step; }
+            set { step = value; }
         }
         public double Calories
         {
@@ -27,11 +51,7 @@ namespace ST10128054PROG6221POE
             set { numRecipe = value; }
         }
 
-        public String RecName
-        {
-            get { return recName; }
-            set { recName = value; }
-        }
+        
 
         public String IngrName
         {
@@ -56,18 +76,14 @@ namespace ST10128054PROG6221POE
             get { return measurement; }
             set { measurement = value; }
         }
-
+        
         public int NumSteps
         {
             get { return numSteps; }
             set { numSteps = value; }
         }
 
-        public String StepDesc
-        {
-            get { return stepDesc; }
-            set { stepDesc = value; }
-        }
+       
 
         public int Alter
         {
@@ -79,7 +95,7 @@ namespace ST10128054PROG6221POE
         {
             get { return scaledQuant; }
             set { scaledQuant = value; }
-        }
+        }*/
 
     }
 }

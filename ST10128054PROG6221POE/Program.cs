@@ -10,8 +10,12 @@ namespace ST10128054PROG6221POE
     internal class Program
     {
         //initialzing an object of the class Recipe
-        public static Recipe rc = new Recipe();
+        //public static Recipe rc = new Recipe();
         //initialzing arraylist to store the recipe details
+
+        public static List<Recipe> lstRecipe = new List<Recipe>();
+        public static List<ScaledRecipe> lstScaledRecipe = new List<ScaledRecipe>();
+
         public static List<string> recipeNameList = new List<string>();//stores name of recipe
         public static List<string> ingrNameList = new List<string>();//stores name of ingredient
         public static List<double> ingrQuantList = new List<double>();//stores the quantity of ingredient before scaling
@@ -30,10 +34,24 @@ namespace ST10128054PROG6221POE
         public static List<string> caloriesListStr = new List<string>();
         public static List<double> foodGroupPrint = new List<double>();
         public static int mainMenu = 0;
+        public static int scaleMenu;
         public static Boolean scaled = false;
+        public static int ingrQuantScale;
         public static int recipeIndex;
         public static int foodGroupOpt;
         public static int totCalories;
+
+        public static string step;
+        public static string ingrName;
+        public static string measurement;
+        public static string foodGroup;
+        public static int numRecipe;
+        public static int numIngr;
+        public static int numSteps;
+        public static int alter;
+        public static double ingrQuant;
+        public static double scaledQuant;
+        public static double calories;
 
         public delegate void delDisCalories();
 
@@ -74,7 +92,7 @@ namespace ST10128054PROG6221POE
                 else if (mainMenu == 2)
                 {
                     //call scaleMeasurement method
-                    scaleMeasurement();
+                    //scaleMeasurement();
                 }
                 else if (mainMenu == 3)
                 {
@@ -106,11 +124,16 @@ namespace ST10128054PROG6221POE
             Boolean checkIngr = false;
             Boolean checkQuant = false;
             Boolean checkSteps = false;
+            Boolean checkCalories = false; 
+            Boolean checkScale = false;
+            Boolean checkFoodGroup = false;
 
-            StringBuilder sbIngr = new StringBuilder();
+
+            StringBuilder sbIngrInfo = new StringBuilder();
+            StringBuilder sbScaledIngrInfo = new StringBuilder();
             StringBuilder sbQuant = new StringBuilder();
             StringBuilder sbMeasurement = new StringBuilder();
-            StringBuilder sbDesc = new StringBuilder();
+            StringBuilder sbInsructions = new StringBuilder();
             StringBuilder sbCalories = new StringBuilder();
             StringBuilder sbFoodGroup = new StringBuilder();
 
@@ -122,7 +145,7 @@ namespace ST10128054PROG6221POE
                     //prompting user for information and then storing said information into arraylists
                     Console.WriteLine("************************************\n" +
                                       "Enter the number of recipes that you want to save: ");
-                    rc.NumRecipe = Convert.ToInt32(Console.ReadLine());
+                    numRecipe = Convert.ToInt32(Console.ReadLine());
                     checkRecipe = true;
                 }
                 catch (Exception ex)
@@ -133,11 +156,13 @@ namespace ST10128054PROG6221POE
                 }
             }
 
-            for (int k = 0; k < rc.NumRecipe; k++)
+            for (int k = 0; k < numRecipe; k++)
             {
+                
+
                 Console.WriteLine("Enter the name of recipe " + (k + 1) + ": ");
-                rc.RecName = Console.ReadLine().ToUpper();
-                recipeNameList.Add(rc.RecName);
+                string recName = Console.ReadLine().ToUpper();
+
                 while (!checkIngr)
                 {
                     try
@@ -146,7 +171,7 @@ namespace ST10128054PROG6221POE
                         //prompting user for information and then storing said information into arraylists
                         Console.WriteLine("************************************\n" +
                                           "Enter the number of ingredients for the recipe: ");
-                        rc.NumIngr = Convert.ToInt32(Console.ReadLine());
+                        numIngr = Convert.ToInt32(Console.ReadLine());
                         checkIngr = true;
                     }
                     catch (Exception ex)
@@ -156,42 +181,112 @@ namespace ST10128054PROG6221POE
 
                     }
                 }
+                checkIngr = false;
 
-                for (int i = 0; i < rc.NumIngr; i++)
+                alter = 0;
+                
+
+                while (!checkScale)
+                {
+                    try
+                    {
+                        
+                        //menu system to allow the user to pick the factor amount
+                        Console.WriteLine("************************************\n" +
+                                          "Do you want to alter the quantities of the ingredients?\n" +
+                                          "1) Half.\n" +
+                                          "2) Double.\n" +
+                                          "3) Triple.\n" +
+                                          "4) No.\n" );
+                        alter = Convert.ToInt32(Console.ReadLine());
+                        checkScale = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Please enter a number.");
+
+                    }
+                }
+                checkScale = false;
+                
+
+
+                for (int i = 0; i < numIngr; i++)
                 {
                     Console.WriteLine("Enter the name of ingredient " + (i + 1) + ": ");
-                    rc.IngrName = Console.ReadLine();
-                    sbIngr.Append(rc.IngrName + ",");
+                    ingrName = Console.ReadLine();
+
+                    if (alter == 1 || alter == 2 || alter == 3)
+                    {
+                        while (!checkQuant)
+                        {
+                            try
+                            {
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine("Enter the quantity of ingredient " + (i + 1) + ": ");
+                                ingrQuant = Convert.ToInt32(Console.ReadLine());
+                                scaledQuant = scaleMeasurement(ingrQuant);
+
+
+                                checkQuant = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please enter a number.");
+                            }
+                        }
+                        checkQuant = false;
+                    }
+                    else if (alter == 4)
+                    {
+                        while (!checkQuant)
+                        {
+                            try
+                            {
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine("Enter the quantity of ingredient " + (i + 1) + ": ");
+                                ingrQuant = Convert.ToInt32(Console.ReadLine());
+                                
+                                checkQuant = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please enter a number.");
+                            }
+                        }
+                        checkQuant = false;
+                    }
                     
-                    while (!checkQuant)
+
+
+                    Console.WriteLine("Enter the unit of measurement of ingredient " + (i + 1) + ": ");
+                    measurement = Console.ReadLine();
+                    
+                    while (!checkCalories)
                     {
                         try
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine("Enter the quantity of ingredient " + (i + 1) + ": ");
-                            rc.IngrQuant = Convert.ToInt32(Console.ReadLine());
-                            checkQuant = true;
+                            Console.WriteLine("Enter the number of calories of ingredient " + (i + 1) + ": ");
+                            calories = Convert.ToInt32(Console.ReadLine());
+                            checkCalories = true;
                         }
                         catch (Exception ex)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Please enter a number.");
-
                         }
                     }
-                    sbQuant.Append(rc.IngrQuant + ",");
-                    
+                    checkCalories = false;
 
-                    Console.WriteLine("Enter the unit of measurement of ingredient " + (i + 1) + ": ");
-                    rc.Measurement = Console.ReadLine();
-                    sbMeasurement.Append(rc.Measurement + ",");
-                    
-
-                    Console.WriteLine("Enter the number of calories of ingredient " + (i + 1) + ": ");
-                    rc.Calories = Convert.ToInt32(Console.ReadLine());
-                    sbCalories.Append(rc.Measurement + ",");
-
-                    Console.WriteLine("Enter the food group of ingredient " + (i + 1) + ": \n" +
+                    while (!checkFoodGroup)
+                    {
+                        try
+                        {
+                            Console.WriteLine("Enter the food group of ingredient " + (i + 1) + ": \n" +
                                       "1) Starchy foods.\n" +
                                       "2) Vegetables and fruits.\n" +
                                       "3) Dry beans, peas, lentils and soya.\n" +
@@ -199,51 +294,61 @@ namespace ST10128054PROG6221POE
                                       "5) Milk and dairy products.\n" +
                                       "6) Fats and oil.\n" +
                                       "7) Water");
-                    foodGroupOpt = Convert.ToInt32(Console.ReadLine());
+                            foodGroupOpt = Convert.ToInt32(Console.ReadLine());
+                            checkFoodGroup = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Please enter a number.");
+                        }
+                    }
+                    checkFoodGroup = false;
 
                     if (foodGroupOpt == 1)
                     {
-                        rc.FoodGroup = "Starchy foods";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Starchy foods";
                     }
                     else if (foodGroupOpt == 2)
                     {
-                        rc.FoodGroup = "Vegetables and fruits";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Vegetables and fruits";
                     }
                     else if (foodGroupOpt == 3)
                     {
-                        rc.FoodGroup = "Dry beans, peas, lentils and soya";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Dry beans, peas, lentils and soya";
                     }
                     else if (foodGroupOpt == 4)
                     {
-                        rc.FoodGroup = "Chicken, fish, meat and eggs";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Chicken, fish, meat and eggs";
                     }
                     else if (foodGroupOpt == 5)
                     {
-                        rc.FoodGroup = "Milk and dairy products";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Milk and dairy products";
                     }
                     else if (foodGroupOpt == 6)
                     {
-                        rc.FoodGroup = "Fats and oil";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Fats and oil";
                     }
                     else if (foodGroupOpt == 7)
                     {
-                        rc.FoodGroup = "Water";
-                        sbFoodGroup.Append(rc.FoodGroup + ",");
+                        foodGroup = "Water";
                     }
-
                     
-                    sbCalories.Append(rc.Measurement + ",");
 
-                    checkQuant = false;
+                    if (alter == 1 || alter == 2 || alter == 3)
+                    {
+                        sbScaledIngrInfo.Append((i + 1) + ". " + scaledQuant + " " + measurement + " of " + ingrName +
+                                      ", Food Group: " + foodGroup + ", Calories: " + calories + "\n");
+                    }
+                    
+                        sbIngrInfo.Append((i + 1) + ". " + ingrQuant + " " + measurement + " of " + ingrName +
+                                      ", Food Group: " + foodGroup + ", Calories: " + calories + "\n");
+                    
+                        
                 }
-
-                rc.NumIngr = 0;
+                string ingrInfo = sbIngrInfo.ToString();
+                string sIngrInfo = sbScaledIngrInfo.ToString();
+                //numIngr = 0;
                 
                 while (!checkSteps)
                 {
@@ -251,7 +356,7 @@ namespace ST10128054PROG6221POE
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Enter the number of steps for the recipe: ");
-                        rc.NumSteps = Convert.ToInt32(Console.ReadLine());
+                        numSteps = Convert.ToInt32(Console.ReadLine());
                         checkSteps = true;
                     }
                     catch (Exception ex)
@@ -261,21 +366,25 @@ namespace ST10128054PROG6221POE
 
                     }
                 }
-                rc.NumSteps = 0;
+                checkSteps = false;
+                //rc.NumSteps = 0;
 
-                
-
-                for (int j = 0; j < rc.NumSteps; j++)
+                for (int j = 0; j < numSteps; j++)
                 {
                     Console.WriteLine("Enter the description for step " + (j + 1) + ": ");
-                    rc.StepDesc = Console.ReadLine();
-                    sbDesc.Append("Step " + (j + 1) + ": " + rc.StepDesc + "\n");
+                    step = Console.ReadLine();
+                    sbInsructions.Append("Step " + (j + 1) + ": " + step + "\n");
                 }
-                stepDescList.Add(sbDesc.ToString());
+                string instructions = sbInsructions.ToString();
+
+                lstRecipe.Add(new Recipe(recName, ingrInfo, instructions));
+                lstScaledRecipe.Add(new ScaledRecipe(recName, sIngrInfo, instructions));
+
+                /*stepDescList.Add(sbDesc.ToString());
                 ingrNameList.Add(sbIngr.ToString());
                 ingrQuantListStr.Add(sbQuant.ToString());
                 measurementList.Add(sbMeasurement.ToString());
-                caloriesListStr.Add(sbCalories.ToString());
+                caloriesListStr.Add(sbCalories.ToString());*/
 
             }
             
@@ -287,73 +396,44 @@ namespace ST10128054PROG6221POE
         }
 
         //this method scales the quantities of the ingredients
-        public static void scaleMeasurement()
+        public static double scaleMeasurement(double ingrQuant)
         {
-            Boolean checkScale = false;
-            ingrQuantPrint = ingrQuantListStr[recipeIndex].Split(char.Parse(",")).ToList();
-
-            while (!checkScale)
-            {
-                try
-                {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    //menu system to allow the user to pick the factor amount
-                    Console.WriteLine("************************************\n" +
-                                      "Do you want to alter the quantities of the ingredients?\n" +
-                                      "1) Half.\n" +
-                                      "2) Double.\n" +
-                                      "3) Triple.\n");
-                    rc.Alter = Convert.ToInt32(Console.ReadLine());
-                    checkScale = true;
-                }
-                catch (Exception ex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Please enter a number.");
-
-                }
-            }
-
             //multiplies the amount in the arraylist by the factor and stores it in a new arraylist
-            if (rc.Alter == 1)
+            if (alter == 1)
             {
-                for (int i = 0; i < ingrQuantPrint.Count; i++)
-                {
-                    rc.ScaledQuant = Convert.ToDouble(ingrQuantPrint[i]) * 0.5;
-                    ingrQuantPrint.Insert(i, Convert.ToString(rc.ScaledQuant));
-                }
+                scaledQuant = ingrQuant * 0.5;
                 scaled = true;
             }
-            else if (rc.Alter == 2)
+            else if (alter == 2)
             {
-                for (int i = 0; i < ingrQuantPrint.Count; i++)
-                {
-                    rc.ScaledQuant = Convert.ToDouble(ingrQuantPrint[i]) * 2;
-                    ingrQuantPrint.Insert(i, Convert.ToString(rc.ScaledQuant));
-                }
+                scaledQuant = ingrQuant * 2;
                 scaled = true;
             }
-            else if (rc.Alter == 3)
+            else if (alter == 3)
             {
-                for (int i = 0; i < ingrQuantPrint.Count; i++)
-                {
-                    rc.ScaledQuant = Convert.ToDouble(ingrQuantPrint[i]) * 3;
-                    ingrQuantPrint.Insert(i, Convert.ToString(rc.ScaledQuant));
-                }
+                scaledQuant = ingrQuant * 3;
                 scaled = true;
+            } else if (alter == 4)
+            {
+                scaledQuant = ingrQuant;
             }
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEASUREMENTS SCALED.");
+            
+            
+            return scaledQuant;
         }
 
         //this method resets the quantities back to their original values
-        public static void resetMeasurement()
+        public static void resetMeasurement()///////
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            for (int i = 0; i < ingrQuantList.Count; i++)
+            
+
+            foreach (ScaledRecipe sRec in lstScaledRecipe)
             {
-                //resets quatities to orignal values
-                scaledQuantList.Insert(i, ingrQuantList[i]);
+                foreach (Recipe rec in lstRecipe)
+                {
+                    sRec.SIngrInfo = rec.IngrInfo;
+                }
             }
             Console.WriteLine("MEASUREMENTS RESET.");
         }
@@ -364,7 +444,30 @@ namespace ST10128054PROG6221POE
             //ingrNamePrint = ingrNameList[0].Split(char.Parse(","));///
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-            Console.WriteLine("Do you want to: \n" +
+            
+
+            if (alter == 1 || alter == 2 || alter == 3)
+            {
+                foreach (ScaledRecipe sRec in lstScaledRecipe)
+                {
+                    Console.WriteLine(sRec.SRecName + "\n" +
+                                      sRec.SIngrInfo + "\n" +
+                                      sRec.SInstructions);
+
+                }
+            }
+            else if (alter == 4)
+            {
+                foreach (Recipe rec in lstRecipe)
+                {
+                    Console.WriteLine(rec.RecName + "\n" +
+                                      rec.IngrInfo + "\n" +
+                                      rec.Instructions);
+
+                }
+            }
+
+                Console.WriteLine("Do you want to: \n" +
                               "1) Search for a recipe.\n" +
                               "2) Display in alphabetical order.");
             int displayType = Convert.ToInt32(Console.ReadLine());

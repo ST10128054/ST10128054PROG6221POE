@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ST10128054PROG6221POE
 {
-    internal class ScaledRecipe
+    public class ScaledRecipe
     {
         public string SRecName { get; set; }
         public string SIngrInfo { get; set; }

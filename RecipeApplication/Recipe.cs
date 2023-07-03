@@ -4,25 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ST10128054PROG6221POE
+namespace RecipeApplication
 {
     public class Recipe
     {
         public string RecName { get; set; }
         public string IngrInfo { get; set; }
         public string Instructions { get; set; }
-        /*private string step;
-        private string ingrName;
-        private string measurement;
-        private string foodGroup;
-        private int numRecipe;
-        private int numIngr;
-        private int numSteps;
-        private int alter;
-        private double ingrQuant;
-        private double scaledQuant;
-        private double calories;*/
-
+        
         public Recipe(string recName, string ingrInfo, string instructions)
         {
             RecName = recName;

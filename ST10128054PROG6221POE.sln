@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST10128054PROG6221POE", "ST10128054PROG6221POE\ST10128054PROG6221POE.csproj", "{29E309B0-42DB-459B-8154-9147CE8B5565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApplication", "RecipeApplication\RecipeApplication.csproj", "{9498F48B-2FF9-4F92-B099-0BC9A13F01DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{29E309B0-42DB-459B-8154-9147CE8B5565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29E309B0-42DB-459B-8154-9147CE8B5565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29E309B0-42DB-459B-8154-9147CE8B5565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9498F48B-2FF9-4F92-B099-0BC9A13F01DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9498F48B-2FF9-4F92-B099-0BC9A13F01DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9498F48B-2FF9-4F92-B099-0BC9A13F01DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9498F48B-2FF9-4F92-B099-0BC9A13F01DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

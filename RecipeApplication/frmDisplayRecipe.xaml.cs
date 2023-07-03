@@ -22,6 +22,7 @@ namespace RecipeApplication
     public partial class frmDisplayRecipe : Window
         
     {
+
         public static string search;
         public static string filter;
         public static int index;
